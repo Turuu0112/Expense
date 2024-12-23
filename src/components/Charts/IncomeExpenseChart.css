@@ -1,0 +1,52 @@
+.chart-container {
+    background-color: transparent;
+  }
+  
+  .chart-container:hover .chart-grid,
+  .chart-container:hover .chart-xaxis,
+  .chart-container:hover .chart-yaxis,
+  .chart-container:hover .chart-tooltip,
+  .chart-container:hover .chart-legend {
+    background-color: white;
+  }
+  
+  .chart-bar:hover {
+    opacity: 0.8;
+  }
+  
+  .chart-tooltip:hover {
+    background-color: white;
+    border: 1px solid #ccc;
+  }
+  .chart-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px; /* Adjust spacing between charts if needed */
+  }
+  
+  .chart-container > div {
+    width: 16px; 
+  }
+  
+  .chart-grid {
+    stroke: #ddd;
+  }
+  
+  .chart-xaxis,
+  .chart-yaxis {
+    font-size: 12px;
+  }
+  
+  .chart-tooltip {
+    background: #fff;
+    border: 1px solid #ccc;
+  }
+  
+  .chart-legend {
+    font-size: 12px;
+  }
+  
+  .chart-bar {
+    border-radius: 8px;
+  }
+  
