@@ -18,9 +18,18 @@ const dashboard = () => {
     .filter((el) => el.status === "income")
     .reduce((acc, el) => acc + Number(el.amount), 0); // Number() ашиглаж хөрвүүлнэ
 
-  const totalExpense = categories
+    const totalExpense = categories
     .filter((el) => el.status === "expense")
-    .reduce((acc, el) => acc + Number(el.amount), 0); // Number() ашиглаж хөрвүүлнэ
+    .reduce((acc, el) => {
+      const amount = Number(el.amount);
+      // Check if amount is a valid number
+      if (!isNaN(amount)) {
+        return acc + amount; // Add to the accumulator if the amount is valid
+      }
+      return acc; // Otherwise, skip this entry
+    }, 0); // Start with 0 as the accumulator
+  console.log(totalExpense);
+  
 
   // Нийт дүн (зарлагаас орлогыг хасаж байна)
   const totalAmount = totalIncome - totalExpense;
@@ -120,27 +129,25 @@ const dashboard = () => {
               {last5Categories.map((el) => (
                 <div
                   key={el.id}
-                  className="flex justify-between mx-4 items-center border-b-2"
+                  className="flex justify-between items-center border-b border-[#E2E8F0] gap-5 py-4 hover:bg-[#F3F4F6] transition-all"
                 >
-                  <div className="flex relative items-center">
-                    <div className="relative">{renderIcon(el.category)}</div>
-                    <div className="mx-6 absolute top-10 left-8 text-[12px] text-[#6B7280] flex gap-2">
-                      <p className="w-fit flex">{el.time}</p>
+                  <div className="flex items-center space-x-4">
+                    {/* Category Icon */}
+                    <div className="relative w-8 h-8">
+                      {renderIcon(el.category)}
+                    </div>
+                    {/* Category Time */}
+                    <div className="text-sm text-[#6B7280]">
+                      <p>{el.time}</p>
                     </div>
                   </div>
+
+                  {/* Amount and Status */}
                   <div
-                    className={`${
-                      el.status === "income"
-                        ? "text-[#23E01F]"
-                        : "text-[#F54949]"
-                    }`}
+                    className={`text-[16px] font-semibold ${el.status === "income" ? "text-[#23E01F]" : "text-[#F54949]"
+                      }`}
                   >
-                    <p>
-                      {el.status === "income"
-                        ? `+ ${el.amount}`
-                        : `- ${el.amount}`}
-                      ₮
-                    </p>
+                    <p>{el.status === "income" ? `+ ${el.amount}` : `- ${el.amount}`}₮</p>
                   </div>
                 </div>
               ))}
